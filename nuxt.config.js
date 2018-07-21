@@ -27,12 +27,15 @@ module.exports = {
    * Add plugins
    */
   plugins: [
-    
+    { src: '~plugins/baseui' }
   ],
   /*
   ** Add axios globally
   */
   build: {
-    vendor: ['axios', 'email-validator', 'moment', 'localforage']
+    vendor: ['axios', 'email-validator', 'moment', 'localforage'],
+    styleResources: {
+      scss: './assets/scss/vars.scss'
+    }
   }
 }

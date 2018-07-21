@@ -1,0 +1,33 @@
+// 主要颜色
+$primaryColor: #4183d7;
+// 成功颜色
+$successColor: #67C23A;
+// 警告颜色
+$warningColor: #E6A23C;
+// 危险颜色
+$dangerColor: #F56C6C;
+// 信息颜色
+$infoColor: #909399;
+
+// 文本颜色
+// 主要文本颜色
+$primaryTextColor: #303133;
+// 常规文本颜色
+$normalTextColor: #303133;
+// 次要文本颜色
+$secondaryTextColor: #303133;
+// 占位文本颜色
+$placeholderTextColor: #303133;
+
+// 边框颜色
+// 1级
+$borderLevel1Color: #DCDFE6;
+// 二级
+$borderLeve21Color: #E4E7ED;
+// 三级
+$borderLeve31Color: #EBEEF5;
+// 四级
+$borderLevel4Color: #F2F6FC;
+
+// 主要背景渐变色
+$primaryGradientColor: linear-gradient(to right,#83aee5, $primaryColor);
