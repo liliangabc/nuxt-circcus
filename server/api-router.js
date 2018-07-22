@@ -30,7 +30,7 @@ const checkLogin = (req, res, next) => {
 }
 
 // 用户登录
-router.post('/login', urlencodedParser, (req, res) => {
+router.post('/login.json', urlencodedParser, (req, res) => {
   let { userName, password } = req.body
   axiosInstance.post(`${APIURL}/student_login.json`, qs.stringify({
     userName, password
@@ -45,7 +45,7 @@ router.post('/login', urlencodedParser, (req, res) => {
 })
 
 // 用户退出
-router.post('/logout', urlencodedParser, (req, res) => {
+router.post('/logout.json', urlencodedParser, (req, res) => {
   axiosInstance.post(`${APIURL}/student_logout.json`, qs.stringify({
     token: req.body.token
   })).then(({ data }) => {

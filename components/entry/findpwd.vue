@@ -3,10 +3,10 @@
   <com-icon-button class="btn-back" :src="iconBack" icon-size="18" @click="onBack"></com-icon-button>
   <p class="hint">Enter your email address and we'll send you a link to rest your</p>
   <div class="form-item">
-    <div class="label" @click="showLoading">Email address</div>
-    <com-input></com-input>
+    <div class="label">Email address</div>
+    <com-input v-model.trim="userName"></com-input>
   </div>
-  <com-button class="btn-submit" fullWidth>SEND</com-button>
+  <com-button class="btn-submit" fullWidth :disabled="disabled" @click="onSubmit">SEND</com-button>
   <com-loading fullscreen v-if="loading"></com-loading>
 </div>
 </template>
@@ -16,18 +16,30 @@ export default {
   data() {
     return {
       iconBack,
-      loading: false
+      loading: false,
+      userName: ''
+    }
+  },
+  computed: {
+    disabled() {
+      return !this.userName
     }
   },
   methods: {
     onBack() {
       this.$router.back()
     },
-    showLoading() {
+    onSubmit() {
+      if (this.disabled) return
       this.loading = true
-      setTimeout(() => {
+      this.$store.dispatch('findpwd', {
+        userName: this.userName
+      }).then(() => {
         this.loading = false
-      }, 2000)
+        this.$router.replace('/entry')
+      }).catch(err => {
+        this.loading = false
+      })
     }
   }
 }

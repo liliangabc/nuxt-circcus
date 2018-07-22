@@ -33,7 +33,7 @@ module.exports = {
   ** Add axios globally
   */
   build: {
-    vendor: ['axios', 'email-validator', 'moment', 'localforage'],
+    vendor: ['axios', 'email-validator', 'spin', 'moment', 'localforage'],
     styleResources: {
       scss: './assets/scss/vars.scss'
     }
