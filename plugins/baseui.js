@@ -12,6 +12,8 @@ import ComDrawer from '~/components/base/drawer'
 import ComOverlay from '~/components/base/overlay'
 import ComInput from '~/components/base/input'
 import ComButton from '~/components/base/button'
+import ComSpinner from '~/components/base/spinner'
+import ComLoading from '~/components/base/loading'
 
 const coms = {
   ComIconButton, // 图标按钮
@@ -21,7 +23,9 @@ const coms = {
   ComDrawer, // 抽屉
   ComOverlay, // 遮罩层
   ComInput, // 文本框
-  ComButton // 按钮
+  ComButton, // 按钮
+  ComSpinner, // 加载中
+  ComLoading // 全屏加载中
 }
 
 for (let name in coms) Vue.component(name, coms[name])

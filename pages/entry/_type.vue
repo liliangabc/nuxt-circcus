@@ -1,7 +1,7 @@
 <template>
 <div class="page-entry">
   <com-entry-header></com-entry-header>
-  <com-entry-tabs></com-entry-tabs>
+  <com-entry-tabs v-if="hasTabs"></com-entry-tabs>
   <component :is="curView"></component>
 </div>
 </template>
@@ -14,13 +14,18 @@ import ComEntryFindpwd from '~/components/entry/findpwd'
 export default {
   components: { ComEntryHeader, ComEntryTabs },
   computed: {
+    type() {
+      return this.$route.params.type
+    },
     curView() {
-      let { type } = this.$route.params
       return ({
         login: ComEntryLogin,
         register: ComEntryRegister,
         findpwd: ComEntryFindpwd
-      })[type]
+      })[this.type]
+    },
+    hasTabs() {
+      return ['login', 'register'].indexOf(this.type) !== -1
     }
   }
 }
@@ -28,6 +33,7 @@ export default {
 <style lang="scss">
 .com-entry-subwrapper {
   padding: 40px 30px;
+  position: relative;
   .form-item {
     margin-bottom: 12px;
     .label {
@@ -47,15 +53,6 @@ export default {
   .btn-submit {
     margin-top: 40px;
     margin-bottom: 30px;
-  }
-  .footer {
-    font-size: 14px;
-    line-height: 1.6;
-    color: $secondaryTextColor;
-    a {
-      text-decoration: underline;
-      color: $econdaryPrimaryColor;
-    }
   }
 }
 </style>

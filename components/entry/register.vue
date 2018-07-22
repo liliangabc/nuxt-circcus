@@ -34,5 +34,15 @@ export default {
 }
 </script>
 <style lang="scss">
-
+.com-entry-subwrapper.com-entry-register {
+  .footer {
+    font-size: 14px;
+    line-height: 1.6;
+    color: $secondaryTextColor;
+    a {
+      text-decoration: underline;
+      color: $econdaryPrimaryColor;
+    }
+  }
+}
 </style>
