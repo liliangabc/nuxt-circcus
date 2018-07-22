@@ -1,5 +1,5 @@
 <template>
-<button class="com-icon-button" :style="styles"></button>
+<button class="com-icon-button" :style="styles" @click="$emit('click', $event)"></button>
 </template>
 <script>
 export default {

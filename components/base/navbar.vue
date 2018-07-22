@@ -40,7 +40,7 @@ $navbarHeight: 48px;
 .com-navbar-title {
   height: 100%;
   line-height: $navbarHeight;
-  font-size: 20px;
+  font-size: 18px;
   color: #fff;
   position: absolute;
   left: 0;

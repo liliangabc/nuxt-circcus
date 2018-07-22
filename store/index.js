@@ -20,6 +20,9 @@ const store = () => new Vuex.Store({
       userInfo: {},
       token: ''
     },
+    // 侧边栏
+    sidebarVisible: false,
+
     previewParams: null,
     blocks: {
       mblockList: '',
@@ -28,6 +31,11 @@ const store = () => new Vuex.Store({
     }
   },
   mutations: {
+    // 侧边栏打开与关闭
+    toggleSidebar(state, visible = false) {
+      state.sidebarVisible = visible
+    },
+
     // 保存用户数据
     saveUserData: (state, data) => state.userData = data,
     // 清除用户数据

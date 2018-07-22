@@ -4,8 +4,14 @@
 </div>
 </template>
 <script>
+import { getMaxZIndex } from '../tools'
 export default {
-  
+  props: {
+    value: {}
+  },
+  mounted() {
+    console.log(getMaxZIndex())
+  }
 }
 </script>
 <style lang="scss">
