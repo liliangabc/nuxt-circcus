@@ -1,25 +1,19 @@
 <template>
-<div class="com-main-layout">
+<div class="com-default-layout">
   <div class="slot-container">
     <nuxt/>
   </div>
-  <com-drawer :open="sidebarVisible" @close="onSidebarClose"></com-drawer>
+  <com-sidebar></com-sidebar>
 </div>
 </template>
 <script>
+import ComSidebar from '~/components/common/sidebar'
 export default {
-  computed: {
-    sidebarVisible() {
-      return this.$store.state.sidebarVisible
-    }
-  },
-  methods: {
-    onSidebarClose() {
-      this.$store.commit('toggleSidebar')
-    }
-  }
+  components: { ComSidebar }
 }
 </script>
 <style lang="scss">
-
+.com-default-layout {
+  min-height: 100vh;
+}
 </style>

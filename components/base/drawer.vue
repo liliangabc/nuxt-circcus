@@ -1,6 +1,6 @@
 <template>
 <transition>
-  <div class="com-drawer" v-if="visible" :style="styles">
+  <div class="com-drawer" v-show="visible" :style="styles">
     <slot></slot>
     <com-overlay v-if="overlayVisible" :zIndex="zIndex - 1" @click="closeOverlay" @destroy="close"></com-overlay>
   </div>
