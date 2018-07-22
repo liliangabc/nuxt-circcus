@@ -11,6 +11,7 @@ import ComTabbar from '~/components/base/tabbar'
 import ComDrawer from '~/components/base/drawer'
 import ComOverlay from '~/components/base/overlay'
 import ComInput from '~/components/base/input'
+import ComButton from '~/components/base/button'
 
 const coms = {
   ComIconButton, // 图标按钮
@@ -19,7 +20,8 @@ const coms = {
   ComTabbar, // 选项卡
   ComDrawer, // 抽屉
   ComOverlay, // 遮罩层
-  ComInput // 文本框
+  ComInput, // 文本框
+  ComButton // 按钮
 }
 
 for (let name in coms) Vue.component(name, coms[name])

@@ -1,8 +1,8 @@
 <template>
 <div class="com-entry-tabs">
   <div class="inner-box">
-    <nuxt-link to="/entry/login">log in</nuxt-link>
-    <nuxt-link to="/entry/register">sign up</nuxt-link>
+    <nuxt-link replace to="/entry/login">log in</nuxt-link>
+    <nuxt-link replace to="/entry/register">sign up</nuxt-link>
   </div>
 </div>
 </template>
