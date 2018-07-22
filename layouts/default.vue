@@ -12,8 +12,3 @@ export default {
   components: { ComSidebar }
 }
 </script>
-<style lang="scss">
-.com-default-layout {
-  min-height: 100vh;
-}
-</style>
