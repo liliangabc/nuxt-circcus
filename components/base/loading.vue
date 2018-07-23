@@ -9,6 +9,7 @@
 <script>
 import { getMaxZIndex } from './tools'
 export default {
+  name: 'com-loading',
   props: {
     size: String,
     fullscreen: Boolean,

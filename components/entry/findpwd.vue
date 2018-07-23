@@ -3,11 +3,12 @@
   <com-icon-button class="btn-back" :src="iconBack" icon-size="18" @click="onBack"></com-icon-button>
   <p class="hint">Enter your email address and we'll send you a link to rest your</p>
   <div class="form-item">
-    <div class="label">Email address</div>
+    <div class="label" @click="toast = true">Email address</div>
     <com-input v-model.trim="userName"></com-input>
   </div>
   <com-button class="btn-submit" fullWidth :disabled="disabled" @click="onSubmit">SEND</com-button>
   <com-loading fullscreen v-if="loading"></com-loading>
+  <com-toast :open.sync="toast" message="hello world"></com-toast>
 </div>
 </template>
 <script>
@@ -17,7 +18,8 @@ export default {
     return {
       iconBack,
       loading: false,
-      userName: ''
+      userName: '',
+      toast: false
     }
   },
   computed: {
