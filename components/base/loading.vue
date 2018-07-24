@@ -1,7 +1,7 @@
 <template>
-<transition>
-  <div class="com-loading" :class="{fullscreen}">
-    <div class="com-loading-overlay" :style="styles"></div>
+<transition @after-leave="onAfterLeave">
+  <div class="com-loading" v-if="isOpen" :class="{isFull}">
+    <div class="overlay" :style="styles"></div>
     <com-spinner :size="size"></com-spinner>
   </div>
 </transition>
@@ -9,29 +9,44 @@
 <script>
 import { getMaxZIndex } from './tools'
 export default {
-  name: 'com-loading',
+  data() {
+    return {
+      zIndex: 0,
+      isOpen: false
+    }
+  },
   props: {
     size: String,
-    fullscreen: Boolean,
-    bgcolor: String
+    bgcolor: String,
+    target: {}
   },
   computed: {
     styles() {
       let { bgcolor } = this
       return bgcolor ? { backgroundColor: bgcolor } : {}
+    },
+    isFull() {
+      return !this.target
+    }
+  },
+  methods: {
+    init() {
+      this.isOpen = true
+      this.zIndex = getMaxZIndex() + 1
+      this.$nextTick(() => {
+        let target = this.target || document.body
+        target.appendChild(this.$el)
+      })
+    },
+    onAfterLeave() {
+      this.$emit('close')
+    },
+    close() {
+      this.isOpen = false
     }
   },
   mounted() {
-    if (this.fullscreen) {
-      this.url = location.href
-      document.body.appendChild(this.$el)
-      this.$el.style.zIndex = getMaxZIndex() + 1
-    }
-  },
-  beforeDestroy() {
-    if (this.fullscreen && this.url !== location.href) {
-      this.$el.remove()
-    }
+    this.init()
   }
 }
 </script>
@@ -40,18 +55,18 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  &, .com-loading-overlay {
+  &, .overlay {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
   }
-  .com-loading-overlay {
+  .overlay {
     opacity: .7;
     background-color: #fff;
   }
-  &.fullscreen {
+  &.isFull {
     position: fixed;
   }
   &.v-enter-active, &.v-leave-active {

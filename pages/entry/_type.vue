@@ -11,6 +11,7 @@ import ComEntryTabs from '~/components/entry/tabs'
 import ComEntryLogin from '~/components/entry/login'
 import ComEntryRegister from '~/components/entry/register'
 import ComEntryFindpwd from '~/components/entry/findpwd'
+import ComEntryFindsuccess from '~/components/entry/findsuccess'
 export default {
   components: { ComEntryHeader, ComEntryTabs },
   computed: {
@@ -21,7 +22,8 @@ export default {
       return ({
         login: ComEntryLogin,
         register: ComEntryRegister,
-        findpwd: ComEntryFindpwd
+        findpwd: ComEntryFindpwd,
+        findsuccess: ComEntryFindsuccess
       })[this.type]
     },
     hasTabs() {

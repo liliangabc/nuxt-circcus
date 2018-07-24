@@ -16,12 +16,52 @@ const coms = {
   ComButton: _import('button'),
   ComSpinner: _import('spinner'),
   ComLoading: _import('loading'),
-  ComToast: _import('toast')
+  ComToast: _import('toast'),
+  ComDialog: _import('dialog')
 }
 
 export default {
   install(Vue, options) {
     // 全局组件注册
     for (let name in coms) Vue.component(name, coms[name])
+    // 消息提示方法
+    Vue.prototype.$toast = function(props = {}) {
+      return new Vue({
+        render(h) {
+          return h(coms.ComToast, {
+            props, on: {
+              close: () => {
+                this.$destroy()
+              }
+            }
+          })
+        },
+        beforeDestroy() {
+          this.$children[0].$el.remove()
+        }
+      }).$mount()
+    }
+    // 加载中方法
+    Vue.prototype.$loading = function(props = {}) {
+      return new Vue({
+        render(h) {
+          return h(coms.ComLoading, {
+            props, on: {
+              close: () => {
+                this.$destroy()
+              }
+            }
+          })
+        },
+        methods: {
+          close() {
+            this.$children[0].close()
+          }
+        },
+        beforeDestroy() {
+          this.$children[0].$el.remove()
+        }
+      }).$mount()
+    }
   }
 }

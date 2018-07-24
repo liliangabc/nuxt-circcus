@@ -1,33 +1,43 @@
 <template>
-<transition>
-  <div class="com-toast" v-if="open">
+<transition @after-leave="onAfterLeave">
+  <div class="com-toast" v-if="isOpen" :style="{zIndex}">
     <div class="message" :class="type">{{message}}</div>
   </div>
 </transition>
 </template>
 <script>
+import { getMaxZIndex } from './tools'
 export default {
+  data() {
+    return {
+      zIndex: 0,
+      isOpen: false
+    }
+  },
   props: {
     message: String,
     type: String,
-    timeout: {
+    delay: {
       type: [Number, String],
-      default: 2500
-    },
-    open: Boolean
-  },
-  watch: {
-    open(newval) {
-      if (newval) this.close()
+      default: 3000
     }
   },
   methods: {
-    close() {
-      clearTimeout(this.tid)
-      this.tid = setTimeout(() => {
-        this.$emit('update:open', false)
-      }, +this.timeout)
+    init() {
+      console.log(this.type)
+      this.isOpen = true
+      this.zIndex = getMaxZIndex() + 1
+      this.$nextTick(() => {
+        document.body.appendChild(this.$el)
+      })
+      setTimeout(() => { this.isOpen = false }, +this.delay)
+    },
+    onAfterLeave() {
+      this.$emit('close')
     }
+  },
+  mounted() {
+    this.init()
   }
 }
 </script>
@@ -39,7 +49,7 @@ export default {
   left: 0;
   .message {
     width: 100%;
-    min-height: 40px;
+    min-height: 34px;
     line-height: 1.45;
     padding: 8px;
     color: #fff;
@@ -51,7 +61,7 @@ export default {
     &.warning {
       background-color: $warningColor;
     }
-    &.danger {
+    &.error {
       background-color: $dangerColor;
     }
     &.info {

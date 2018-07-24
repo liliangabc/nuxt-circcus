@@ -3,12 +3,10 @@
   <com-icon-button class="btn-back" :src="iconBack" icon-size="18" @click="onBack"></com-icon-button>
   <p class="hint">Enter your email address and we'll send you a link to rest your</p>
   <div class="form-item">
-    <div class="label" @click="toast = true">Email address</div>
+    <div class="label">Email address</div>
     <com-input v-model.trim="userName"></com-input>
   </div>
   <com-button class="btn-submit" fullWidth :disabled="disabled" @click="onSubmit">SEND</com-button>
-  <com-loading fullscreen v-if="loading"></com-loading>
-  <com-toast :open.sync="toast" message="hello world"></com-toast>
 </div>
 </template>
 <script>
@@ -17,9 +15,7 @@ export default {
   data() {
     return {
       iconBack,
-      loading: false,
-      userName: '',
-      toast: false
+      userName: ''
     }
   },
   computed: {
@@ -33,14 +29,15 @@ export default {
     },
     onSubmit() {
       if (this.disabled) return
-      this.loading = true
+      const comLoading = this.$loading()
       this.$store.dispatch('findpwd', {
         userName: this.userName
       }).then(() => {
-        this.loading = false
-        this.$router.replace('/entry')
+        comLoading.close()
+        this.$router.replace('/entry/findsuccess')
       }).catch(err => {
-        this.loading = false
+        comLoading.close()
+        this.$toast({ message: err.message, type: 'error' })
       })
     }
   }
