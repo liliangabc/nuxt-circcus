@@ -17,7 +17,8 @@ const coms = {
   ComSpinner: _import('spinner'),
   ComLoading: _import('loading'),
   ComToast: _import('toast'),
-  ComDialog: _import('dialog')
+  ComDialog: _import('dialog'),
+  ComAvator: _import('avator')
 }
 
 export default {

@@ -34,7 +34,7 @@ export default {
         userName: this.userName
       }).then(() => {
         comLoading.close()
-        this.$router.replace('/entry/findsuccess')
+        this.$router.push('/entry/findsuccess')
       }).catch(err => {
         comLoading.close()
         this.$toast({ message: err.message, type: 'error' })

@@ -24,7 +24,6 @@ export default {
   },
   methods: {
     init() {
-      console.log(this.type)
       this.isOpen = true
       this.zIndex = getMaxZIndex() + 1
       this.$nextTick(() => {
@@ -47,6 +46,7 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
+  pointer-events: none;
   .message {
     width: 100%;
     min-height: 34px;

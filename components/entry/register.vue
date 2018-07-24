@@ -22,15 +22,14 @@
     <nuxt-link to="/">Privacy Policy</nuxt-link>
   </div>
   <com-button class="btn-submit" :disabled="disabled" fullWidth @click="onSubmit">CREATE ACCOUNT</com-button>
-  <com-loading fullscreen v-if="loading"></com-loading>
 </div>
 </template>
 <script>
+import { isSchoolEmail } from '~/plugins'
 export default {
   data() {
     return {
-      formData: {},
-      loading: false
+      formData: {}
     }
   },
   computed: {
@@ -42,20 +41,34 @@ export default {
   methods: {
     onSubmit() {
       if (this.disabled) return
+      let errText = this.validate()
+      if (errText) return this.$toast({ message: errText, type: 'error' })
       let { email, userName, password } = this.formData
-      this.loading = true
+      const comLoading = this.$loading()
       this.$store.dispatch('register', {
         email, userName, password
-      }).then(() => {
-        this.loading = false
+      }).then(data => {
+        comLoading.close()
+        this.$toast({ message: data.info, type: 'success' })
         this.$router.replace('/entry')
       }).catch(err => {
-        this.loading = false
-        alert(err.message)
+        comLoading.close()
+        this.$toast({ message: err.message, type: 'error' })
       })
     },
     validate() {
-      
+      let errText = '',
+        { email, userName, password, confirmPassword } = this.formData
+      if (!isSchoolEmail(email)) {
+        errText = 'Please enter your school e-mail address.'
+      } else if (/\s+/.test(userName)) {
+        errText = 'Invalid username.Please don\'t enter space.'
+      } else if (password.length < 6) {
+        errText = 'Password can not be less than 6 characters.'
+      } else if (password !== confirmPassword) {
+        errText = 'Passwords do not match.'
+      }
+      return errText
     }
   }
 }

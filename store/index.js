@@ -26,6 +26,16 @@ const store = () => new Vuex.Store({
     clearUserData: state => state.userData = { userInfo: {}, token: '' }
   },
   actions: {
+    // 框架服务端初始化 | 用户自动登陆控制 | 该方法在服务端页面渲染之前被调用
+    nuxtServerInit({ commit, dispatch }, { req }) {
+      let { userData } = req.session
+      if (!userData) return
+      return dispatch('login', userData).then(data => {
+        commit('saveUserData', {
+          userInfo: data.data, token: data.token
+        })
+      }).catch(err => console.log(err))
+    },
     post({ state }, { api, data = {} }) {
       let { token } = state.userData
       let params = {

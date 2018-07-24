@@ -15,7 +15,6 @@
   <div class="align-right">
     <nuxt-link to="/">Skip</nuxt-link>
   </div>
-  <com-loading fullscreen v-if="loading"></com-loading>
 </div>
 </template>
 <script>
@@ -23,8 +22,7 @@ import base64 from '~/plugins/base64'
 export default {
   data() {
     return {
-      formData: {},
-      loading: false
+      formData: {}
     }
   },
   computed: {
@@ -37,16 +35,16 @@ export default {
     onSubmit() {
       if (this.disabled) return
       let { userName, password } = this.formData
-      this.loading = true
+      const comLoading = this.$loading()
       this.$store.dispatch('login', {
         userName: base64(`${userName}opSAd^12dsa`),
         password: base64(`${password}opSAd^12dsa`)
       }).then(() => {
-        this.loading = false
-        this.$router.push('/')
+        comLoading.close()
+        location.href = '/'
       }).catch(err => {
-        this.loading = false
-        alert(err.message)
+        comLoading.close()
+        this.$toast({ message: err.message, type: 'error' })
       })
     }
   }

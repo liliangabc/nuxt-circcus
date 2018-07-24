@@ -37,6 +37,8 @@ router.post('/login.json', urlencodedParser, (req, res) => {
   })).then(({ data }) => {
     if (data.error_code === '0') {
       req.session.userData = { userName, password }
+    } else {
+      delete req.session.userData
     }
     res.json(data)
   }).catch(err => {
