@@ -37,5 +37,7 @@ export default {
   background-repeat: no-repeat;
   background-position: center center;
   background-color: transparent;
+  border-radius: 50%;
+  user-select: none;
 }
 </style>
