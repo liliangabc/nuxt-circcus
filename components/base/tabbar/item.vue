@@ -1,11 +1,11 @@
 <template>
-<button class="com-tabbar-item" :class="{active: isActive}" @click="onTabChange">{{label}}</button>
+<nuxt-link class="com-tabbar-item" replace :to="to">{{label}}</nuxt-link>
 </template>
 <script>
 export default {
   props: {
     label: String,
-    value: {}
+    to: String
   },
   computed: {
     isActive() {
@@ -30,7 +30,7 @@ export default {
   text-transform: uppercase;
   color: rgba(255, 255, 255, .7);
   border-bottom: 3px solid transparent;
-  &.active {
+  &.nuxt-link-active {
     color: #fff;
     border-bottom-color: $warningColor;
   }

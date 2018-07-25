@@ -59,9 +59,9 @@ export default {
 <style lang="scss">
 .com-drawer {
   width: 256px;
+  height: 100vh;
   position: fixed;
   top: 0;
-  bottom: 0;
   left: 0;
   background-color: #fff;
   box-shadow: 0 3px 10px rgba(0,0,0,.16), 0 3px 10px rgba(0,0,0,.23);

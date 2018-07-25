@@ -8,7 +8,9 @@ import jstz from 'jstimezonedetect'
 
 import { $http } from '~/plugins/axios'
 
+// 引入状态模块
 import user from './user'
+import home from './home'
 
 Vue.use(Vuex)
 
@@ -47,7 +49,7 @@ const store = () => new Vuex.Store({
       return $http({ api: `/${api}.json`, params })
     }
   },
-  modules: { user }
+  modules: { user, home }
 })
 
 export default store

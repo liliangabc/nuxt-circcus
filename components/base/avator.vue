@@ -1,18 +1,24 @@
 <template>
 <div class="com-avator" :style="styles">
   <nuxt-link class="link" v-if="to" :to="to">
-    <img :src="src">
+    <img :src="src || iconAvator">
   </nuxt-link>
   <img v-else :src="src">
 </div>
 </template>
 <script>
+import iconAvator from '~/assets/img/base/touxiang-zw@3x.png'
 export default {
+  data() {
+    return {
+      iconAvator
+    }
+  },
   props: {
     src: String,
     size: {
       type: [Number, String],
-      default: 48
+      default: 40
     },
     to: String
   },

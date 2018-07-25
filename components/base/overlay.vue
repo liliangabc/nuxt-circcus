@@ -30,11 +30,11 @@ export default {
 </script>
 <style lang="scss">
 .com-overlay {
+  height: 100vh;
   background-color: #000;
   position: fixed;
   top: 0;
   right: 0;
-  bottom: 0;
   left: 0;
   opacity: .4;
   &.v-enter-active, &.v-leave-active {

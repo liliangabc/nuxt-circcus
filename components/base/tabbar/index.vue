@@ -3,16 +3,10 @@
   <slot></slot>
 </div>
 </template>
-<script>
-export default {
-  props: {
-    value: {}
-  }
-}
-</script>
 <style lang="scss">
 .com-tabbar {
   height: 48px;
+  line-height: 46px;
   display: flex;
   align-items: center;
   overflow: auto;
