@@ -2,7 +2,7 @@
 <div class="com-navbar">
   <div class="com-navbar-left">
     <slot name="left">
-      <com-icon-button :src="iconBack"></com-icon-button>
+      <com-icon-button :src="iconBack" @click="goBack"></com-icon-button>
     </slot>
   </div>
   <div class="com-navbar-title">
@@ -23,6 +23,11 @@ export default {
   },
   props: {
     title: String
+  },
+  methods: {
+    goBack() {
+      this.$router.back()
+    }
   }
 }
 </script>
@@ -46,6 +51,7 @@ $navbarHeight: 48px;
   left: 0;
   right: 0;
   text-align: center;
+  text-transform: capitalize;
 }
 .com-navbar-left, .com-navbar-right {
   position: relative;

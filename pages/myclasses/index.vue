@@ -1,6 +1,6 @@
 <template>
 <div class="page-myclasses">
-  page-myclasses
+  <com-main-navbar title="my classes" has-search></com-main-navbar>
 </div>
 </template>
 <script>

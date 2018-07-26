@@ -1,6 +1,6 @@
 <template>
 <div class="page-answer-questions">
-  page-answer-questions
+  <com-main-navbar title="answer questions"></com-main-navbar>
 </div>
 </template>
 <script>

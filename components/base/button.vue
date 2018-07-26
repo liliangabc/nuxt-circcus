@@ -27,6 +27,7 @@ export default {
   font-size: 15px;
   color: #fff;
   user-select: none;
+  text-transform: uppercase;
   background-color: $econdaryPrimaryColor;
   transition: all .12s ease;
   &:active {

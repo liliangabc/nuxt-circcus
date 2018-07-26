@@ -1,6 +1,6 @@
 <template>
 <div class="page-mypoints">
-  page-mypoints
+  <com-main-navbar title="my points"></com-main-navbar>
 </div>
 </template>
 <script>

@@ -1,6 +1,6 @@
 <template>
 <div class="page-favorite-type">
-  page-favorite-type
+  <com-main-navbar title="favorite"></com-main-navbar>
 </div>
 </template>
 <script>

@@ -1,6 +1,6 @@
 <template>
 <div class="page-activity-log-type">
-  page-activity-log-type
+  <com-main-navbar title="activity log"></com-main-navbar>
 </div>
 </template>
 <script>

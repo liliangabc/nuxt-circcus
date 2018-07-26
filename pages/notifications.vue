@@ -1,6 +1,6 @@
 <template>
 <div class="page-notifications">
-  page-notifications
+  <com-main-navbar title="notifications"></com-main-navbar>
 </div>
 </template>
 <script>
