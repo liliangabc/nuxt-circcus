@@ -5,7 +5,7 @@
     <transition>
       <ul class="list" v-show="listVisible">
         <li>
-          <com-float-button :src="icons.filter" size="32" icon-size="32"></com-float-button>
+          <com-float-button :src="icons.filter" size="32" icon-size="32" @click="openDialog"></com-float-button>
         </li>
         <li>
           <com-float-button :src="icons.add" size="32" icon-size="32"></com-float-button>
@@ -34,6 +34,9 @@ export default {
   methods: {
     toggleList() {
       this.listVisible = !this.listVisible
+    },
+    openDialog(event) {
+      this.$emit('openDialog', event)
     }
   }
 }

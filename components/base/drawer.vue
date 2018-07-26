@@ -1,8 +1,8 @@
 <template>
 <transition>
-  <div class="com-drawer" v-show="visible" :style="styles">
+  <div class="com-drawer" v-show="open" :style="styles">
     <slot></slot>
-    <com-overlay v-if="overlayVisible" :zIndex="zIndex - 1" @click="closeOverlay" @destroy="close"></com-overlay>
+    <com-overlay v-show="open" :zIndex="zIndex - 1" @click="close"></com-overlay>
   </div>
 </transition>
 </template>
@@ -10,16 +10,10 @@
 import { getMaxZIndex } from './tools'
 export default {
   data() {
-    return {
-      zIndex: 10,
-      visible: false,
-      overlayVisible: false
-    }
+    return { zIndex: 0 }
   },
   props: {
-    width: {
-      type: [Number, String]
-    },
+    width: [Number, String],
     open: Boolean
   },
   watch: {
@@ -40,15 +34,11 @@ export default {
       this.$emit('close')
     },
     visibleChange() {
-      this.visible = this.overlayVisible = this.open
-    },
-    closeOverlay() {
-      this.overlayVisible = false
+      if (this.open) this.zIndex = getMaxZIndex() + 2
     }
   },
   mounted() {
     this.visibleChange()
-    this.zIndex = getMaxZIndex() + 2
     document.body.appendChild(this.$el)
   },
   beforeDestroy() {

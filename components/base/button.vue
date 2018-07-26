@@ -50,7 +50,7 @@ export default {
   &.plain {
     color: $econdaryPrimaryColor;
     border: 1px solid $econdaryPrimaryColor;
-    background-color: mix(#fff, $econdaryPrimaryColor, 90%);
+    background-color: #fff;
     &:active, &.active {
       color: #fff;
       background-color: $econdaryPrimaryColor;
@@ -64,7 +64,6 @@ export default {
     &.plain {
       color: $successColor;
       border: 1px solid $successColor;
-      background-color: mix(#fff, $successColor, 90%);
       &:active, &.active {
         color: #fff;
         background-color: $successColor;
@@ -79,7 +78,6 @@ export default {
     &.plain {
       color: $warningColor;
       border: 1px solid $warningColor;
-      background-color: mix(#fff, $warningColor, 90%);
       &:active, &.active {
         color: #fff;
         background-color: $warningColor;
@@ -94,7 +92,6 @@ export default {
     &.plain {
       color: $dangerColor;
       border: 1px solid $dangerColor;
-      background-color: mix(#fff, $dangerColor, 90%);
       &:active, &.active {
         color: #fff;
         background-color: $dangerColor;
@@ -109,7 +106,6 @@ export default {
     &.plain {
       color: $infoColor;
       border: 1px solid $infoColor;
-      background-color: mix(#fff, $infoColor, 90%);
       &:active, &.active {
         color: #fff;
         background-color: $infoColor;

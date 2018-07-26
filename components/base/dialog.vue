@@ -1,18 +1,22 @@
 <template>
-<div class="com-dialog-wrapper" v-show="visible" :style="{zIndex}">
-  <div class="com-dialog" :style="dialogStyle" :class="dialogClass">
-    <div class="com-dialog-title">
-      <slot name="title">{{title}}</slot>
-      <button class="btn-close" @click="onClose">&times;</button>
+<transition>
+  <div class="com-dialog-wrapper" v-show="visible" :style="{zIndex}">
+    <div class="overlay" @click="onOverlayClick"></div>
+    <div class="com-dialog" :style="dialogStyle" :class="dialogClass">
+      <div class="com-dialog-title">
+        <slot name="title">{{title}}</slot>
+        <button class="btn-close" @click="onClose">&times;</button>
+      </div>
+      <div class="com-dialog-body">
+        <slot></slot>
+      </div>
+      <div class="com-dialog-actions">
+        <slot name="actions"></slot>
+      </div>
     </div>
-    <div class="com-dialog-body">
-      <slot></slot>
-    </div>
-    <div class="com-dialog-actions">
-      <slot name="actions"></slot>
-    </div>
+    <com-overlay v-show="visible" :zIndex="zIndex - 1"></com-overlay>
   </div>
-</div>
+</transition>
 </template>
 <script>
 import { getMaxZIndex } from './tools'
@@ -24,7 +28,8 @@ export default {
     visible: Boolean,
     title: String,
     dialogClass: String,
-    width: String
+    width: String,
+    isModal: false
   },
   computed: {
     dialogStyle() {
@@ -34,19 +39,22 @@ export default {
   },
   watch: {
     visible(newval) {
-      if (newval) this.updateZIndex()
+      this.visibleChange()
     }
   },
   methods: {
     onClose() {
       this.$emit('update:visible', false)
     },
-    updateZIndex() {
-      this.zIndex = getMaxZIndex() + 2
+    visibleChange() {
+      if (this.visible) this.zIndex = getMaxZIndex() + 2
+    },
+    onOverlayClick() {
+      if (!this.isModal) this.onClose()
     }
   },
   mounted() {
-    this.updateZIndex()
+    this.visibleChange()
     document.body.appendChild(this.$el)
   },
   beforeDestroy() {
@@ -58,19 +66,34 @@ export default {
 $dialogPadding: 20px;
 .com-dialog-wrapper {
   position: fixed;
-  top: 0;
   right: 0;
   bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, .7);
   display: flex;
   align-items: center;
   justify-content: center;
+  &, > .overlay {
+    top: 0;
+    left: 0;
+  }
+  > .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  &.v-enter-active, &.v-leave-active {
+    transition: all .45s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  &.v-enter, &.v-leave-to {
+    opacity: 0;
+    transform: translateY(12px);
+  }
 }
 .com-dialog {
   width: 80%;
   border-radius: 4px;
   background-color: #fff;
+  position: relative;
+  z-index: 1;
 }
 .com-dialog-title {
   padding: $dialogPadding;
@@ -85,8 +108,9 @@ $dialogPadding: 20px;
     position: absolute;
     top: 8px;
     right: 8px;
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
+    line-height: 1;
     border-radius: 50%;
     font-size: 24px;
     background: transparent;
@@ -102,7 +126,7 @@ $dialogPadding: 20px;
   color: $normalTextColor;
 }
 .com-dialog-actions {
-  padding: $dialogPadding/2 $dialogPadding;
+  padding: 12px $dialogPadding;
   text-align: center;
   border-top: 1px solid $borderLevel3Color;
   .com-button {
@@ -110,7 +134,7 @@ $dialogPadding: 20px;
     font-size: 12px;
     text-transform: uppercase;
     & + .com-button {
-      margin-left: 12px;
+      margin-left: 15px;
     }
   }
 }

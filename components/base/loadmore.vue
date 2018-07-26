@@ -1,7 +1,9 @@
 <template>
 <div class="com-loadmore">
-  <com-spinner size="mini"></com-spinner>
-  <span class="text">{{loadingText}}</span>
+  <template v-if="loading">
+    <com-spinner size="mini"></com-spinner>
+    <span class="text">{{loadingText}}</span>
+  </template>
 </div>
 </template>
 <script>
@@ -27,7 +29,7 @@ export default {
         scrH = this.realScroller.scrollHeight
         scrTop = this.realScroller.scrollTop
       }
-      if (scrH - viewH - scrTop < 50) this.$emit('loadmore')
+      if (scrH - viewH - scrTop < 100) this.$emit('loadmore')
     }
   },
   mounted() {

@@ -14,11 +14,11 @@ import ComEntryFindpwd from '~/components/entry/findpwd'
 import ComEntryFindsuccess from '~/components/entry/findsuccess'
 export default {
   components: { ComEntryHeader, ComEntryTabs },
-  asyncData({ store, redirect }) {
-    if (store.state.userData.token) {
-      redirect('/')
-    }
-  },
+  // asyncData({ store, redirect }) {
+  //   if (store.state.userData.token) {
+  //     redirect('/')
+  //   }
+  // },
   computed: {
     type() {
       return this.$route.params.type

@@ -24,7 +24,7 @@ export default {
     document.body.appendChild(this.$el)
   },
   beforeDestroy() {
-    this.$emit('destroy')
+    this.$el.remove()
   }
 }
 </script>
