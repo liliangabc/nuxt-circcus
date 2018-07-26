@@ -19,7 +19,8 @@ const coms = {
   ComToast: _import('toast'),
   ComDialog: _import('dialog'),
   ComAvator: _import('avator'),
-  ComFloatButton: _import('float-button')
+  ComFloatButton: _import('float-button'),
+  ComLoadmore: _import('loadmore')
 }
 
 export default {

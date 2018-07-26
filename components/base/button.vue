@@ -1,7 +1,7 @@
 <template>
 <button class="com-button" tabindex="-1"
   :disabled="disabled"
-  :class="[{fullWidth}, size, type, {plain}]"
+  :class="[{fullWidth, plain, square}, size, type]"
   @click="$emit('click', $event)">
   <slot></slot>
 </button>
@@ -13,13 +13,14 @@ export default {
     fullWidth: Boolean,
     type: String,
     plain: Boolean,
-    disabled: Boolean
+    disabled: Boolean,
+    square: Boolean
   }
 }
 </script>
 <style lang="scss">
 .com-button {
-  padding: 0 12px;
+  padding: 0 15px;
   height: 36px;
   border-radius: 18px;
   min-width: 66px;
@@ -33,6 +34,9 @@ export default {
   }
   &.fullWidth {
     width: 100%;
+  }
+  &.square {
+    border-radius: 4px;
   }
   &.small {
     height: 32px;

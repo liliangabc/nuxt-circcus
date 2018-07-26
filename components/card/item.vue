@@ -32,7 +32,7 @@ export default {
 .com-card-item {
   background-color: #fff;
   + .com-card-item {
-    margin-top: 12px;
+    margin-top: 6px;
   }
 }
 </style>
