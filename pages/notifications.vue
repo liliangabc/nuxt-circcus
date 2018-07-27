@@ -1,7 +1,7 @@
 <template>
-<div class="page-notifications">
-  <com-main-navbar title="notifications"></com-main-navbar>
-</div>
+<com-level-one-nav-layout class="page-notifications" title="notifications">
+
+</com-level-one-nav-layout>
 </template>
 <script>
 export default {

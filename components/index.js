@@ -1,7 +1,8 @@
 const _import = name => require(`./${name}.vue`).default
 
 const coms = {
-  ComMainNavbar: _import('common/main-navbar')
+  ComMainNavbar: _import('common/main-navbar'),
+  ComLevelOneNavLayout: _import('common/level-one-nav-layout')
 }
 
 export default {

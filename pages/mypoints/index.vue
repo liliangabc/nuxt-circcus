@@ -1,7 +1,7 @@
 <template>
-<div class="page-mypoints">
-  <com-main-navbar title="my points"></com-main-navbar>
-</div>
+<com-level-one-nav-layout class="page-mypoints" title="my points">
+
+</com-level-one-nav-layout>
 </template>
 <script>
 export default {

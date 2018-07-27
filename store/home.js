@@ -6,15 +6,16 @@ import { posts } from '../plugins'
 
 const getHomeDataAPI = route => {
   let apiName, { type } = route.params
-  if (posts.isEvent(type)) {
+  let { isEvent, isMarket, isClass, isMeetup, isMoment } = posts
+  if (isEvent(type)) {
     apiName = 'index_events_list'
-  } else if (posts.isMarket(type)) {
+  } else if (isMarket(type)) {
     apiName = 'index_markets_list'
-  } else if (posts.isClass(type)) {
+  } else if (isClass(type)) {
     apiName = 'index_classes_list'
-  } else if (posts.isMeetup(type)) {
+  } else if (isMeetup(type)) {
     apiName = 'index_meetingup_list'
-  } else if (posts.isMoment(type)) {
+  } else if (isMoment(type)) {
     apiName = 'index_homepage_list'
   }
   return apiName
@@ -30,7 +31,8 @@ const mutations = {
 
 const actions = {
   ['home/fetchList']({ dispatch }, { route, page = 1, rows = 10 }) {
-    let postData = Object.assign(route.query, { page, rows })
+    let postData = { page, rows }, { query } = route
+    for (let key in query) postData[key] = query[key]
     return dispatch('post', {
       api: getHomeDataAPI(route),
       data: postData

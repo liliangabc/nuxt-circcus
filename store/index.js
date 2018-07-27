@@ -11,6 +11,8 @@ import { $http } from '~/plugins/axios'
 // 引入状态模块
 import user from './user'
 import home from './home'
+import favorite from './favorite'
+import activity from './activity'
 
 Vue.use(Vuex)
 
@@ -49,7 +51,7 @@ const store = () => new Vuex.Store({
       return $http({ api: `/${api}.json`, params })
     }
   },
-  modules: { user, home }
+  modules: { user, home, favorite, activity }
 })
 
 export default store

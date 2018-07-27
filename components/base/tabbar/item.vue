@@ -24,7 +24,7 @@ export default {
 .com-tabbar-item {
   height: 100%;
   color: #fff;
-  padding: 0 12px;
+  padding: 0 15px;
   font-size: 12px;
   background: transparent;
   text-transform: uppercase;

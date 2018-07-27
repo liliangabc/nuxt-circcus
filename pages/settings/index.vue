@@ -1,6 +1,5 @@
 <template>
-<div class="page-settings">
-  <com-main-navbar title="settings"></com-main-navbar>
+<com-level-one-nav-layout class="page-settings" title="settings">
   <ul class="list">
     <li class="item" v-for="item in listItems" :key="item.label">
       <nuxt-link class="link" :to="item.to">
@@ -10,7 +9,7 @@
       </nuxt-link>
     </li>
   </ul>
-</div>
+</com-level-one-nav-layout>
 </template>
 <script>
 const _require = name => require(`~/assets/img/settings/${name}.png`)
@@ -31,7 +30,6 @@ export default {
 </script>
 <style lang="scss">
 .page-settings {
-  padding-top: 48px;
   .list {
     .item {
       height: 56px;

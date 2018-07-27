@@ -35,6 +35,7 @@ export default {
       transform: scaleX(1);
     }
     &::placeholder {
+      font-size: 13px;
       color: $placeholderTextColor;
     }
   }
