@@ -46,7 +46,7 @@ export default {
   &.mini {
     height: 28px;
     border-radius: 14px;
-    font-size: 13px;
+    font-size: 12px;
   }
   &.plain {
     color: $econdaryPrimaryColor;

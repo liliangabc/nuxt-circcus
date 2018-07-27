@@ -2,7 +2,7 @@
 <com-drawer class="com-sidebar" :open="sidebarVisible" @close="onSidebarClose">
   <template v-if="token">
     <header class="com-sidebar-header">
-      <com-avator size="60" :src="userInfo.userHeadImage"></com-avator>
+      <com-avator size="60" :src="userInfo.userHeadImage | setPicSize(60)"></com-avator>
       <h3 class="username">{{userInfo.nickName}}</h3>
       <h4 class="school">{{userInfo.collegeName}}</h4>
     </header>

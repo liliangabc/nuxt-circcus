@@ -1,13 +1,12 @@
 <template>
-<button class="com-icon-button" :style="styles" @click="$emit('click', $event)"></button>
+<button class="com-icon-button" :style="styles" @click="$emit('click', $event)">
+  <slot></slot>
+</button>
 </template>
 <script>
 export default {
   props: {
-    src: {
-      type: String,
-      required: true
-    },
+    src: String,
     size: {
       type: [Number, String],
       default: 40

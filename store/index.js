@@ -13,6 +13,9 @@ import user from './user'
 import home from './home'
 import favorite from './favorite'
 import activity from './activity'
+import notifications from './notifications'
+import mypoints from './mypoints'
+import myclasses from './myclasses'
 
 Vue.use(Vuex)
 
@@ -51,7 +54,15 @@ const store = () => new Vuex.Store({
       return $http({ api: `/${api}.json`, params })
     }
   },
-  modules: { user, home, favorite, activity }
+  modules: {
+    user,
+    home,
+    favorite,
+    activity,
+    notifications,
+    mypoints,
+    myclasses
+  }
 })
 
 export default store

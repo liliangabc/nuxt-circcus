@@ -1,6 +1,6 @@
 <template>
 <header class="com-card-item-header">
-  <com-avator :src="avator"></com-avator>
+  <com-avator :src="item.userHeadImage | setPicSize(40)"></com-avator>
   <div class="middle">
     <h3 class="username">{{item.nickName}}</h3>
     <h4 class="school">{{item.collegeName}}</h4>
@@ -12,15 +12,9 @@
 </header>
 </template>
 <script>
-import { setPicSize } from '~/plugins'
 import { propsMixin } from '../mixins'
 export default {
-  mixins: [propsMixin],
-  computed: {
-    avator() {
-      return setPicSize(this.item.userHeadImage, 40)
-    }
-  }
+  mixins: [propsMixin]
 }
 </script>
 <style lang="scss">
