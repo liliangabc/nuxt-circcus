@@ -36,6 +36,11 @@ const actions = {
     return dispatch('post', {
       api: getHomeDataAPI(route),
       data: postData
+    }).then(data => {
+      return {
+        dataList: data.data.result,
+        hasNext: data.data.hasNext === '1'
+      }
     })
   }
 }

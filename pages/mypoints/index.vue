@@ -11,7 +11,7 @@
       <span class="dealcoins" v-else>{{item.dealCoins}}</span>
     </li>
   </ul>
-  <com-loadmore v-if="hasNext" :loading="loading" @loadmore="onLoadmore"></com-loadmore>
+  <com-loadmore v-if="hasNext" :loading="loading" @loadmore="getData('loadmore')"></com-loadmore>
   <com-bottom-actions></com-bottom-actions>
 </com-level-one-nav-layout>
 </template>
@@ -21,13 +21,7 @@ import ComBottomActions from '~/components/mypoints/bottom-actions'
 export default {
   components: { ComCoinsHeader, ComBottomActions },
   asyncData({ store }) {
-    return store.dispatch('mypoints/fetchLogList', {}).then(data => {
-      return {
-        dataList: data.data.page.result,
-        hasNext: data.data.page.hasNext === '1',
-        coins: data.data.totalCoins
-      }
-    }).catch(err => console.log(err.message))
+    return store.dispatch('mypoints/fetchLogList', {}).catch(err => ({ errmsg: err.message }))
   },
   data() {
     return {
@@ -44,22 +38,19 @@ export default {
       this.page = action === 'loadmore' ? this.page + 1 : 1
       return this.$store.dispatch('mypoints/fetchLogList', {
         page: this.page
-      }).then(data => {
+      }).then(({ dataList, hasNext, coins }) => {
         this.loading = false
         if (action === 'loadmore') {
-          this.dataList.push(...data.data.page.result)
+          this.dataList.push(...dataList)
         } else {
-          this.dataList = data.data.page.result
+          this.dataList = dataList
         }
-        this.hasNext = data.data.page.hasNext === '1'
-        this.coins = data.data.totalCoins
+        this.hasNext = hasNext
+        this.coins = coins
       }).catch(err => {
         this.loading = false
         this.$toast({ message: err.message, type: 'error' })
       })
-    },
-    onLoadmore() {
-      this.getData('loadmore')
     }
   }
 }

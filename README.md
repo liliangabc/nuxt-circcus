@@ -1,4 +1,4 @@
-# mynuxtexpress
+# nuxt-circcus
 
 > Nuxt.js project
 

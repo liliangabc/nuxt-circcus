@@ -1,18 +1,18 @@
 import express from 'express'
 import compression from 'compression'
 import session from 'express-session'
-// import connectRedis from 'connect-redis'
+import connectRedis from 'connect-redis'
 import { Nuxt, Builder } from 'nuxt'
 
 import apiRouter from './api-router'
 
 const app = express()
 const port = process.env.PORT || 5000
-// const RedisStore = connectRedis(session)
+const RedisStore = connectRedis(session)
 
 app.use(compression())
 app.use(session({
-  // store: new RedisStore(),
+  store: new RedisStore(),
   secret: 'hello world 2018',
   resave:true,
   saveUninitialized: false,

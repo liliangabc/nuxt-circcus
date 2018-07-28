@@ -1,7 +1,7 @@
 <template>
 <div class="page-activity-log-type">
   <com-card-list :data-list="dataList"></com-card-list>
-  <com-loadmore v-if="hasNext" :loading="loading" @loadmore="onLoadmore"></com-loadmore>
+  <com-loadmore v-if="hasNext" :loading="loading" @loadmore="getData('loadmore')"></com-loadmore>
 </div>
 </template>
 <script>
@@ -9,12 +9,7 @@ import ComCardList from '~/components/card/list'
 export default {
   components: { ComCardList },
   asyncData({ route, store }) {
-    return store.dispatch('activity/fetchList', { route }).then(data => {
-      return {
-        dataList: data.data.result,
-        hasNext: data.data.hasNext === '1'
-      }
-    }).catch(err => console.log(err.message))
+    return store.dispatch('activity/fetchList', { route }).catch(err => ({ errmsg: err.message }))
   },
   data() {
     return {
@@ -31,21 +26,18 @@ export default {
       return this.$store.dispatch('activity/fetchList', {
         route: this.$route,
         page: this.page
-      }).then(data => {
+      }).then(({ dataList, hasNext }) => {
         this.loading = false
         if (action === 'loadmore') {
-          this.dataList.push(...data.data.result)
+          this.dataList.push(...dataList)
         } else {
-          this.dataList = data.data.result
+          this.dataList = dataList
         }
-        this.hasNext = data.data.hasNext === '1'
+        this.hasNext = hasNext
       }).catch(err => {
         this.loading = false
         this.$toast({ message: err.message, type: 'error' })
       })
-    },
-    onLoadmore() {
-      this.getData('loadmore')
     }
   }
 }

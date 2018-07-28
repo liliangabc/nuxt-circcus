@@ -49,11 +49,13 @@ export default {
   pointer-events: none;
   .message {
     width: 100%;
-    min-height: 34px;
+    min-height: 40px;
     line-height: 1.45;
-    padding: 8px;
+    padding: 8px 12px;
     color: #fff;
-    font-size: 13px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
     background-color: $primaryColor;
     &.success {
       background-color: $successColor;
@@ -68,15 +70,12 @@ export default {
       background-color: $infoColor;
     }
   }
-  &.v-enter-active {
-    transition: all .3s ease-out;
-  }
-  &.v-leave-active {
-    transition: all .3s ease-in;
+  &.v-enter-active, &.v-leave-active {
+    transition: all .24s ease;
   }
   &.v-enter, &.v-leave-to {
     opacity: 0;
-    transform: translateY(100%);
+    transform: translateY(12px);
   }
 }
 </style>

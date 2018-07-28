@@ -7,6 +7,11 @@ const actions = {
     return dispatch('post', {
       api: 'student_notification_list',
       data: { page, rows }
+    }).then(data => {
+      return {
+        dataList: data.data.result,
+        hasNext: data.data.hasNext === '1'
+      }
     })
   }
 }

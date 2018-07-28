@@ -8,6 +8,11 @@ const actions = {
     return dispatch('post', {
       api: 'student_post_activities',
       data: { page, rows, type }
+    }).then(data => {
+      return {
+        dataList: data.data.result,
+        hasNext: data.data.hasNext === '1'
+      }
     })
   }
 }

@@ -1,7 +1,7 @@
 <template>
-<div class="page-settings-contactus">
+<com-level-sub-nav-layout class="page-settings-contactus" title="contact us">
 
-</div>
+</com-level-sub-nav-layout>
 </template>
 <script>
 export default {

@@ -12,6 +12,12 @@ const actions = {
     return dispatch('post', {
       api: 'student_profile_points',
       data: { page, rows }
+    }).then(data => {
+      return {
+        dataList: data.data.page.result,
+        hasNext: data.data.page.hasNext === '1',
+        coins: data.data.totalCoins
+      }
     })
   }
 }

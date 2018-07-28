@@ -11,18 +11,13 @@
       <span class="dot" v-if="item.isRead == '0'"></span>
     </li>
   </ul>
-  <com-loadmore v-if="hasNext" :loading="loading" @loadmore="onLoadmore"></com-loadmore>
+  <com-loadmore v-if="hasNext" :loading="loading" @loadmore="getData('loadmore')"></com-loadmore>
 </com-level-one-nav-layout>
 </template>
 <script>
 export default {
   asyncData({ store }) {
-    return store.dispatch('notications/fetchList', {}).then(data => {
-      return {
-        dataList: data.data.result,
-        hasNext: data.data.hasNext === '1'
-      }
-    }).catch(err => console.log(err.message))
+    return store.dispatch('notications/fetchList', {}).catch(err => ({ errmsg: err.message }))
   },
   data() {
     return {
@@ -38,21 +33,18 @@ export default {
       this.page = action === 'loadmore' ? this.page + 1 : 1
       return this.$store.dispatch('notications/fetchList', {
         page: this.page
-      }).then(data => {
+      }).then(({ dataList, hasNext }) => {
         this.loading = false
         if (action === 'loadmore') {
-          this.dataList.push(...data.data.result)
+          this.dataList.push(...dataList)
         } else {
-          this.dataList = data.data.result
+          this.dataList = dataList
         }
-        this.hasNext = data.data.hasNext === '1'
+        this.hasNext = hasNext
       }).catch(err => {
         this.loading = false
         this.$toast({ message: err.message, type: 'error' })
       })
-    },
-    onLoadmore() {
-      this.getData('loadmore')
     }
   }
 }
