@@ -16,6 +16,7 @@ import activity from './activity'
 import notifications from './notifications'
 import mypoints from './mypoints'
 import myclasses from './myclasses'
+import settings from './settings'
 
 Vue.use(Vuex)
 
@@ -61,7 +62,8 @@ const store = () => new Vuex.Store({
     activity,
     notifications,
     mypoints,
-    myclasses
+    myclasses,
+    settings
   }
 })
 

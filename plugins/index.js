@@ -31,3 +31,18 @@ export const posts = {
   isMeetup: type => +type === 4,
   isMoment: type => +type === 5
 }
+
+// iframe页面混合
+export const iframeViewMixin = {
+  data() {
+    return { comLoading: null }
+  },
+  methods: {
+    onLoaded() {
+      this.comLoading && this.comLoading.close()
+    }
+  },
+  mounted() {
+    this.comLoading = this.$loading()
+  }
+}

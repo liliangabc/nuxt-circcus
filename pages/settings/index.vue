@@ -4,7 +4,7 @@
     <li class="item" v-for="item in listItems" :key="item.label">
       <nuxt-link class="link" :to="item.to">
         <img class="icon" :src="item.icon">
-        <span class="label">{{item.label}}</span>
+        <span class="label" :class="{active: fromPath === item.to}">{{item.label}}</span>
         <i class="arrow"></i>
       </nuxt-link>
     </li>
@@ -24,7 +24,10 @@ const listItems = [
 ]
 export default {
   data() {
-    return { listItems }
+    return { listItems, fromPath: '' }
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => { vm.fromPath = from ? from.path : '' })
   }
 }
 </script>
@@ -54,6 +57,9 @@ export default {
         font-size: 14px;
         flex: 1;
         color: $normalTextColor;
+        &.active {
+          color: $primaryColor;
+        }
       }
       .arrow {
         background: url(~/assets/img/settings/ARROW---LEFT-copy-18.png) no-repeat center center/auto 12px;
