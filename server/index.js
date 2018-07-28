@@ -5,6 +5,7 @@ import session from 'express-session'
 import { Nuxt, Builder } from 'nuxt'
 
 import apiRouter from './api-router'
+import htmlRouter from './html-router'
 
 const app = express()
 const port = process.env.PORT || 5000
@@ -20,6 +21,7 @@ app.use(session({
 }))
 
 app.use('/api', apiRouter)
+app.use('/html', htmlRouter)
 
 let config = require('../nuxt.config')
 config.dev = !(process.env.NODE_ENV === 'production')

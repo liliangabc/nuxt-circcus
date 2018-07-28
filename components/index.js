@@ -1,4 +1,3 @@
-import { IFRAMEURL } from '../server/config'
 const _import = name => require(`./${name}.vue`).default
 
 const coms = {
@@ -9,6 +8,5 @@ const coms = {
 export default {
   install(Vue, options) {
     for (let name in coms) Vue.component(name, coms[name])
-    Vue.prototype.IFRAMEURL = IFRAMEURL
   }
 }

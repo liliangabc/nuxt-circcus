@@ -1,6 +1,6 @@
 <template>
 <com-level-sub-nav-layout class="com-iframe-view" title="Privacy Policy">
-  <iframe frameborder="0" :src="`${IFRAMEURL}/privacyPolicy.html`" @load="onLoaded"></iframe>
+  <iframe frameborder="0" src="/html/privacyPolicy.html" @load="onLoaded"></iframe>
 </com-level-sub-nav-layout>
 </template>
 <script>
