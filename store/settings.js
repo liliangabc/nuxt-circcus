@@ -27,6 +27,30 @@ const actions = {
     }).then(data => {
       return { dataList: data.data.result }
     })
+  },
+  // 获取认证过的课程列表
+  ['settings/getVerifiedCourseList']({ dispatch }, { page = 1, rows = 10 }) {
+    return dispatch('post', {
+      api: 'student_verified_course',
+      data: { page, rows }
+    }).then(data => {
+      return {
+        dataList: data.data.result,
+        hasNext: data.data.hasNext === '1'
+      }
+    })
+  },
+  // 获取未认证过的课程列表
+  ['settings/getUnVerifiedCourseList']({ dispatch }, { page = 1, rows = 10 }) {
+    return dispatch('post', {
+      api: 'student_unverified_course',
+      data: { page, rows }
+    }).then(data => {
+      return {
+        dataList: data.data.result,
+        hasNext: data.data.hasNext === '1'
+      }
+    })
   }
 }
 

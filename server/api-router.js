@@ -47,14 +47,11 @@ router.post('/login.json', urlencodedParser, (req, res) => {
 })
 
 // 用户退出
-router.post('/logout.json', urlencodedParser, (req, res) => {
-  axiosInstance.post(`${APIURL}/student_logout.json`, qs.stringify({
-    token: req.body.token
-  })).then(({ data }) => {
-    delete req.session.userData
-    res.json(data)
-  }).catch(err => {
-    res.json({ error_code: '504', info: err.message })
+router.post('/logout.json', (req, res) => {
+  delete req.session.userData
+  res.json({
+    error_code: '0',
+    info: 'Submitted successfully.'
   })
 })
 

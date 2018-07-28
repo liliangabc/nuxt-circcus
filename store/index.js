@@ -48,7 +48,8 @@ const store = () => new Vuex.Store({
       let { token } = state.userData
       let params = {
         dstTimeZoneId: jstz.determine().name(),
-        fromWeb: 1
+        fromWeb: 1,
+        _t: Date.now()
       }
       if (token) params.token = token
       params = Object.assign(params, data)
