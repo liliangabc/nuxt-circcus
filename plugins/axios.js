@@ -37,8 +37,15 @@ export function $http({ api, params = {}, type = 'POST', headers = {} }) {
       if (data.error_code === '0') {
         resolve(data)
       } else {
-        reject(new Error(data.info))
+        let { error_code, info } = data
+        reject(new Error(JSON.stringify({
+          code: error_code, msg: info
+        })))
       }
-    }).catch(reject)
+    }).catch(err => {
+      reject(new Error(JSON.stringify({
+        code: '500', msg: err.message
+      })))
+    })
   })
 }

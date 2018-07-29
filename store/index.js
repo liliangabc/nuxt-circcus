@@ -37,14 +37,11 @@ const store = () => new Vuex.Store({
     // 框架服务端初始化 | 用户自动登陆控制 | 该方法在服务端页面渲染之前被调用
     nuxtServerInit({ commit, dispatch }, { req }) {
       let { userData } = req.session
-      if (!userData) return
-      return dispatch('login', userData).then(data => {
-        commit('saveUserData', {
-          userInfo: data.data, token: data.token
-        })
-      }).catch(err => console.log(err))
+      if (userData) return dispatch('login', userData).catch(err =>
+        console.log(err.message)
+      )
     },
-    post({ state }, { api, data = {} }) {
+    post({ state, dispatch }, { api, data = {} }) {
       let { token } = state.userData
       let params = {
         dstTimeZoneId: jstz.determine().name(),
@@ -52,8 +49,15 @@ const store = () => new Vuex.Store({
         _t: Date.now()
       }
       if (token) params.token = token
-      params = Object.assign(params, data)
-      return $http({ api: `/${api}.json`, params })
+      for (let key in data) {
+        let value = data[key]
+        if (value !== undefined) params[key] = value
+      }
+      return $http({ api: `/${api}.json`, params }).catch(err => {
+        let { code } = JSON.parse(err.message)
+        if (code === 1) dispatch('logout')
+        throw err
+      })
     }
   },
   modules: {

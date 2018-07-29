@@ -29,7 +29,8 @@ export const posts = {
   isMarket: type => +type === 2,
   isClass: type => +type === 3,
   isMeetup: type => +type === 4,
-  isMoment: type => +type === 5
+  isMoment: type => +type === 5,
+  isComment: type => +type === 6
 }
 
 // iframe页面混合

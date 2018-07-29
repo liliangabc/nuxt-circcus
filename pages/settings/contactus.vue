@@ -42,7 +42,7 @@ export default {
       return this.$store.dispatch('settings/fetchKefu').then(({ kefu, canChat }) => {
         this.kefu = kefu
         this.canChat = canChat
-      })
+      }).catch(err => this.$toastErr(err))
     },
     onSubmit() {
       if (this.disabled) return
@@ -55,7 +55,7 @@ export default {
         this.$toast({ message: data.info, type: 'success' })
       }).catch(err => {
         comLoading.close()
-        this.$toast({ message: err.message, type: 'error' })
+        this.$toastErr(err)
       })
     },
     goChat() {

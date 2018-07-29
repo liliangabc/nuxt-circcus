@@ -1,13 +1,14 @@
 <template>
 <div class="page-activity-log-type">
-  <com-card-list :data-list="dataList"></com-card-list>
+  <component :is="curView" :data-list="dataList"></component>
   <com-loadmore v-if="hasNext" :loading="loading" @loadmore="getData('loadmore')"></com-loadmore>
 </div>
 </template>
 <script>
 import ComCardList from '~/components/card/list'
+import ComCardCommentList from '~/components/card/comment-list'
+import { posts } from '~/plugins'
 export default {
-  components: { ComCardList },
   asyncData({ route, store }) {
     return store.dispatch('activity/fetchList', { route }).catch(err => ({ errmsg: err.message }))
   },
@@ -17,6 +18,11 @@ export default {
       hasNext: false,
       page: 1,
       loading: false
+    }
+  },
+  computed: {
+    curView() {
+      return posts.isComment(this.$route.params.type) ? ComCardCommentList : ComCardList
     }
   },
   methods: {
@@ -36,7 +42,7 @@ export default {
         this.hasNext = hasNext
       }).catch(err => {
         this.loading = false
-        this.$toast({ message: err.message, type: 'error' })
+        this.$toastErr(err)
       })
     }
   }

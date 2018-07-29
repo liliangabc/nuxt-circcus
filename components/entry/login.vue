@@ -40,11 +40,12 @@ export default {
         userName: base64(`${userName}opSAd^12dsa`),
         password: base64(`${password}opSAd^12dsa`)
       }).then(() => {
+        this.formData = {}
         comLoading.close()
         location.href = '/'
       }).catch(err => {
         comLoading.close()
-        this.$toast({ message: err.message, type: 'error' })
+        this.$toastErr(err)
       })
     }
   }

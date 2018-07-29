@@ -49,7 +49,7 @@ export default {
         this.coins = coins
       }).catch(err => {
         this.loading = false
-        this.$toast({ message: err.message, type: 'error' })
+        this.$toastErr(err)
       })
     }
   }

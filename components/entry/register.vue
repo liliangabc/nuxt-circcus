@@ -18,8 +18,8 @@
   </div>
   <div class="footer">
     By Clicking on Create Account,I Agree with Circcus
-    <nuxt-link to="/">Terms of Use</nuxt-link> and
-    <nuxt-link to="/">Privacy Policy</nuxt-link>
+    <nuxt-link to="/settings/userterms">Terms of Use</nuxt-link> and
+    <nuxt-link to="/settings/privacy">Privacy Policy</nuxt-link>
   </div>
   <com-button class="btn-submit" :disabled="disabled" fullWidth @click="onSubmit">CREATE ACCOUNT</com-button>
 </div>
